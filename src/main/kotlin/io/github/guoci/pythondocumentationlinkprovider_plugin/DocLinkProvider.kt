@@ -2,7 +2,7 @@ package io.github.guoci.pythondocumentationlinkprovider_plugin
 
 import com.google.common.collect.ImmutableMap
 import com.intellij.psi.PsiElement
-
+import com.jetbrains.python.documentation.PythonDocumentationMap
 import com.jetbrains.python.documentation.PythonDocumentationLinkProvider
 import com.jetbrains.python.documentation.PythonDocumentationProvider
 import java.io.BufferedReader
@@ -29,7 +29,7 @@ class DocLinkProvider : PythonDocumentationLinkProvider {
             throw RuntimeException(e)
         }
 
-        b.build()
+        b.buildKeepingLast() // TODO change to b.buildOrThrow()
     }
   private val docSite = mapOf("django" to "https://docs.djangoproject.com/en/stable/",
       "matplotlib" to "https://matplotlib.org/devdocs/",
@@ -42,6 +42,7 @@ class DocLinkProvider : PythonDocumentationLinkProvider {
       "tensorflow" to "https://www.tensorflow.org", "keras" to "https://www.tensorflow.org")
 
     override fun getExternalDocumentationUrl(element: PsiElement?, originalElement: PsiElement?): String? {
+        PythonDocumentationMap.getInstance().entries
         val qname = PythonDocumentationProvider.getFullQualifiedName(element)
         println("element = [${element}], originalElement = [${originalElement}]")
         println("qname = ${qname}")
@@ -59,10 +60,9 @@ class DocLinkProvider : PythonDocumentationLinkProvider {
         ) {
 //        return if (qname != null && qname.firstComponent in listOf("numpy", "scipy") &&
 //                !PythonDocumentationMap.getInstance().entries.containsKey(qname.firstComponent)) {
-            println("element = [${element}], originalElement = [${originalElement}]")
             val webPage = nameToWebpageName.get(qname.toString())
             if (webPage != null) {
-                "${docSite[qname.firstComponent]}$webPage.html"
+                "${docSite[qname.firstComponent]}$webPage"
             } else {
                 "${docSite[qname.firstComponent]}"
             }
