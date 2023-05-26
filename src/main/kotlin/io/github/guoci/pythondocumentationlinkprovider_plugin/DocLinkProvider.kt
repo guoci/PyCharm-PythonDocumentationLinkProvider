@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap
 import com.intellij.psi.PsiElement
 
 import com.jetbrains.python.documentation.PythonDocumentationLinkProvider
-import com.jetbrains.python.documentation.PythonDocumentationMap
 import com.jetbrains.python.documentation.PythonDocumentationProvider
 import java.io.BufferedReader
 import java.io.IOException
@@ -17,7 +16,7 @@ class DocLinkProvider : PythonDocumentationLinkProvider {
             BufferedReader(
                 InputStreamReader(
                     DocLinkProvider::class.java
-                        .getResourceAsStream("pandasNameMapping.tsv"),
+                        .getResourceAsStream("/allNameMapping.tsv"),
                     Charsets.UTF_8
                 )
             ).use { inputStream ->
@@ -44,7 +43,8 @@ class DocLinkProvider : PythonDocumentationLinkProvider {
 
     override fun getExternalDocumentationUrl(element: PsiElement?, originalElement: PsiElement?): String? {
         val qname = PythonDocumentationProvider.getFullQualifiedName(element)
-
+        println("element = [${element}], originalElement = [${originalElement}]")
+        println("qname = ${qname}")
         return if (qname != null && qname.firstComponent in listOf(
                 "django",
                 "matplotlib",

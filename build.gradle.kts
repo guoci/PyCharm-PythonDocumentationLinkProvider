@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.guoci"
-version = "1.0-SNAPSHOT"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
