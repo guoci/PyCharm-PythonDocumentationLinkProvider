@@ -31,6 +31,7 @@
     <depends>com.intellij.modules.python</depends>
     <extensions defaultExtensionNs="Pythonid">
         <documentationLinkProvider
-                implementation="io.github.guoci.pythondocumentationlinkprovider_plugin.DocLinkProvider"/>
+                implementation="io.github.guoci.pythondocumentationlinkprovider_plugin.DocLinkProvider"
+                order="first"/>
     </extensions>
 </idea-plugin>
