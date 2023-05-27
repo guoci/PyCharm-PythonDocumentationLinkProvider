@@ -62,8 +62,24 @@ class DocLinkProvider : PythonDocumentationLinkProvider {
     }
 
     override fun getExternalDocumentationUrl(element: PsiElement?, originalElement: PsiElement?): String? {
-//        val qname = PythonDocumentationProvider.getFullQualifiedName(element)?.toString()
-        val qname = getQname(element, originalElement)
+        val qname0 = PythonDocumentationProvider.getFullQualifiedName(element)?.toString()!!
+        val qname_split = qname0.split(".", limit = 2)
+        println("qname_split = ${qname_split}")
+        val qname = if (qname_split[1].split(".")[0] in setOf(
+                "_pytest",
+                "django",
+                "keras",
+                "matplotlib",
+                "numpy",
+                "pandas",
+                "scipy",
+                "sklearn",
+                "tensorflow",
+                "torch"
+            )
+        )
+            qname_split[1] else qname0
+//        val qname = getQname(element, originalElement)
         println("element = [${element}], originalElement = [${originalElement}]")
         println("qname = $qname")
         return if (qname == null)
