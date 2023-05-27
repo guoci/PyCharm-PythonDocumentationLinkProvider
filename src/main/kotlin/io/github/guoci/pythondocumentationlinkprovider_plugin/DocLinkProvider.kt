@@ -82,60 +82,62 @@ class DocLinkProvider : PythonDocumentationLinkProvider {
 //        val qname = getQname(element, originalElement)
         println("element = [${element}], originalElement = [${originalElement}]")
         println("qname = $qname")
-        return if (qname == null)
-            null
-        else {
-            val path = docsMapping[qname]
-            when {
-                qname.startsWith("numpy.") -> "$numpy_doc_site/$path"
-                qname.startsWith("scipy.") -> "$scipy_doc_site/$path"
-                qname.startsWith("pandas.") -> {
-                    if (path == null) {
-                        val name = qname.split(".").last()
-                        if (name == "iloc" || name == "loc" || name == "iat")
-                            "$pandas_doc_site/reference/api/pandas.DataFrame.$name.html"
-                        else
-                            "https://pandas.pydata.org/docs/search.html?q=$name"
-                    } else
-                        "$pandas_doc_site/$path"
-                }
-
-                qname.startsWith("django.") -> "$django_doc_site/$path"
-                qname.startsWith("matplotlib.") -> "$matplotlib_doc_site/$path"
-
-                qname.startsWith("tensorflow.") -> {
-                    val qname2 = if (qname.startsWith("tensorflow.python."))
-                        "tensorflow." + qname.substring("tensorflow.python.".length) else qname
-                    val path2 = docsMapping[qname2]
-                    val pathFinal = path ?: path2
-                    if (pathFinal == null)
-                        "$tensorflow_doc_site/s/results?q=${java.net.URLEncoder.encode(qname2, "UTF8")}"
-                    else
-                        "$tensorflow_doc_site/api_docs/python/$pathFinal"
-                }
-
-                qname.startsWith("keras.") -> {
-                    val path2 = docsMapping["tensorflow.$qname"]
-                    "$tensorflow_doc_site/api_docs/python/${path2 ?: path}"
-                }
-
-                qname.startsWith("_pytest.") -> "https://docs.pytest.org/en/latest/reference/reference.html#$path"
-
-                qname.startsWith("torch.") -> {
-                    val qname2 = qname.replace("_TensorBase._TensorBase", "_TensorBase")
-                    val qname3 =
-                        if (qname2.startsWith("torch._C._TensorBase.")) "torch.Tensor." + qname2.substring("torch._C._TensorBase.".length)
-                        else qname2
-                    println("qname3 = ${qname3}")
-                    "https://pytorch.org/docs/main/${docsMapping[qname3]}"
-                }
-
-                qname.startsWith("sklearn.") -> "https://scikit-learn.org/dev/$path"
-
-                else -> null
+        val path = docsMapping[qname]
+        return when {
+            qname.startsWith("numpy.") -> "$numpy_doc_site/$path"
+            qname.startsWith("scipy.") -> {
+                if (path == null && qname.startsWith("scipy.constants."))
+                    "$scipy_doc_site/reference/constants.html"
+                else
+                    "$scipy_doc_site/$path"
             }
 
+            qname.startsWith("pandas.") -> {
+                if (path == null) {
+                    val name = qname.split(".").last()
+                    if (name == "iloc" || name == "loc" || name == "iat")
+                        "$pandas_doc_site/reference/api/pandas.DataFrame.$name.html"
+                    else
+                        "https://pandas.pydata.org/docs/search.html?q=$name"
+                } else
+                    "$pandas_doc_site/$path"
+            }
+
+            qname.startsWith("django.") -> "$django_doc_site/$path"
+            qname.startsWith("matplotlib.") -> "$matplotlib_doc_site/$path"
+
+            qname.startsWith("tensorflow.") -> {
+                val qname2 = if (qname.startsWith("tensorflow.python."))
+                    "tensorflow." + qname.substring("tensorflow.python.".length) else qname
+                val path2 = docsMapping[qname2]
+                val pathFinal = path ?: path2
+                if (pathFinal == null)
+                    "$tensorflow_doc_site/s/results?q=${java.net.URLEncoder.encode(qname2, "UTF8")}"
+                else
+                    "$tensorflow_doc_site/api_docs/python/$pathFinal"
+            }
+
+            qname.startsWith("keras.") -> {
+                val path2 = docsMapping["tensorflow.$qname"]
+                "$tensorflow_doc_site/api_docs/python/${path2 ?: path}"
+            }
+
+            qname.startsWith("_pytest.") -> "https://docs.pytest.org/en/latest/reference/reference.html#$path"
+
+            qname.startsWith("torch.") -> {
+                val qname2 = qname.replace("_TensorBase._TensorBase", "_TensorBase")
+                val qname3 =
+                    if (qname2.startsWith("torch._C._TensorBase.")) "torch.Tensor." + qname2.substring("torch._C._TensorBase.".length)
+                    else qname2
+                println("qname3 = ${qname3}")
+                "https://pytorch.org/docs/main/${docsMapping[qname3]}"
+            }
+
+            qname.startsWith("sklearn.") -> "https://scikit-learn.org/dev/$path"
+
+            else -> null
         }
+
     }
 
 }
