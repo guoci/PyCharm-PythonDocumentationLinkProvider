@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "PythonDocumentationLinkProvider_plugin"
+rootProject.name = "PythonDocumentationLinkProvider"

@@ -7,42 +7,26 @@ import com.jetbrains.python.documentation.PythonDocumentationProvider
 import com.jetbrains.python.psi.PyFunction
 import com.jetbrains.python.psi.resolve.QualifiedNameFinder
 import java.io.BufferedReader
-import java.io.IOException
 import java.io.InputStreamReader
 
 class DocLinkProvider : PythonDocumentationLinkProvider {
     private val docsMapping: Map<String, String> by lazy {
         val b = ImmutableMap.builder<String, String>()
-        try {
-            BufferedReader(
-                InputStreamReader(
-                    DocLinkProvider::class.java
-                        .getResourceAsStream("/allNameMapping.tsv")!!,
-                    Charsets.UTF_8
-                )
-            ).use { inputStream ->
-                inputStream.lines().forEach { line ->
-                    val kv = line.split("\t".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                    b.put(kv[0], kv[1])
-                }
+        BufferedReader(
+            InputStreamReader(
+                DocLinkProvider::class.java
+                    .getResourceAsStream("/allNameMapping.tsv")!!,
+                Charsets.UTF_8
+            )
+        ).use { inputStream ->
+            inputStream.lines().forEach { line ->
+                val kv = line.split("\t").dropLastWhile { it.isEmpty() }
+                b.put(kv[0], kv[1])
             }
-        } catch (e: IOException) {
-            throw RuntimeException(e)
         }
-
         b.buildKeepingLast() // TODO change to b.buildOrThrow()
     }
 
-    //  private val docSite = mapOf("django" to "https://docs.djangoproject.com/en/stable/",
-//      "matplotlib" to "https://matplotlib.org/devdocs/",
-//      "numpy" to "https://numpy.org/doc/stable/",
-//      "pandas" to "https://pandas.pydata.org/docs/dev/",
-//      "_pytest" to "https://docs.pytest.org/en/latest/reference/reference.html#",
-//      "pytorch" to "https://pytorch.org/docs/main/",
-//      "scipy" to "https://docs.scipy.org/doc/scipy/",
-//      "sklearn" to "https://scikit-learn.org/dev/",
-//      "tensorflow" to "https://www.tensorflow.org", "keras" to "https://www.tensorflow.org"
-//  )
     private val numpy_doc_site = "https://numpy.org/doc/stable"
     private val scipy_doc_site = "https://docs.scipy.org/doc/scipy"
     private val pandas_doc_site = "https://pandas.pydata.org/docs/dev"

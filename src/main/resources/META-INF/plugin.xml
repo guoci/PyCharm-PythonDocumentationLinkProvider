@@ -1,11 +1,11 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-    <id>io.github.guoci.PythonDocumentationLinkProvider_plugin</id>
+    <id>io.github.guoci.PythonDocumentationLinkProvider</id>
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Python Documentation Link Provider</name>
+    <name>Python External Documentation Link Provider</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="zguoci@gmail.com" url="https://github.com/guoci">Guo Ci</vendor>
@@ -14,7 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-<p>Opens html documentation in the browser. Currently supported modules are:</p>
+    <p>Opens html documentation in the browser. Use <code>Shift+F1</code> to open html documentation in browser. Currently, supported modules are:</p>
 <ul>
     <li>django</li>
     <li>matplotlib</li>
@@ -26,8 +26,9 @@
     <li>tensorflow</li>
     <li>torch</li>
 </ul>
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+<em>Important notice</em>
+<p>In <code>Settings</code> &rarr; <code>Tools</code> &rarr; <code>(Python) External Documentation</code>, remove URL templates for modules that you do not use.</p>
+<p>Those URL templates will block this plugin from working.</p>
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.
