@@ -14,7 +14,18 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    <p>Opens the html documentation in the browser.</p>
+<p>Opens html documentation in the browser. Currently supported modules are:</p>
+<ul>
+    <li>django</li>
+    <li>matplotlib</li>
+    <li>numpy</li>
+    <li>pandas</li>
+    <li>pytest</li>
+    <li>scipy</li>
+    <li>sklearn</li>
+    <li>tensorflow</li>
+    <li>torch</li>
+</ul>
     Enter short description for your plugin here.<br>
     <em>most HTML tags may be used</em>
   ]]></description>
