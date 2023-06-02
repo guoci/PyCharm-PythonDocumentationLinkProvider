@@ -16,15 +16,15 @@
     <description><![CDATA[
     <p>Opens html documentation in the browser. Use <code>Shift+F1</code> to open html documentation in browser. Currently, supported modules are:</p>
 <ul>
-    <li>django</li>
-    <li>matplotlib</li>
-    <li>numpy</li>
+    <li>Django</li>
+    <li>Matplotlib</li>
+    <li>NumPy</li>
     <li>pandas</li>
     <li>pytest</li>
-    <li>scipy</li>
-    <li>sklearn</li>
-    <li>tensorflow</li>
-    <li>torch</li>
+    <li>SciPy</li>
+    <li>scikit-learn(sklearn)</li>
+    <li>TensorFlow</li>
+    <li>PyTorch</li>
 </ul>
 <em>Important notice</em>
 <p>In <code>Settings</code> &rarr; <code>Tools</code> &rarr; <code>(Python) External Documentation</code>, remove URL templates for modules that you do not use.</p>
