@@ -1,7 +1,8 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.8.21"
+//    id("org.jetbrains.kotlin.jvm") version "1.8.21"
     id("org.jetbrains.intellij") version "1.13.3"
+    kotlin("jvm") version "1.9.0-Beta"
 }
 
 group = "io.github.guoci"
@@ -46,4 +47,10 @@ tasks {
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
+}
+dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+}
+kotlin {
+    jvmToolchain(11)
 }
