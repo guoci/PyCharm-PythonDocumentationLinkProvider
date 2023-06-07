@@ -50,7 +50,7 @@ class DocLinkProvider : PythonDocumentationLinkProvider {
         println("qname0 = ${qname0}")
         val qname_split = qname0.split(".", limit = 2)
         println("qname_split = ${qname_split}")
-        val qname = if (qname_split[1].split(".")[0] in setOf(
+        val qname = if (qname_split.size > 1 && qname_split[1].split(".")[0] in setOf(
                 "_pytest",
                 "django",
                 "keras",
