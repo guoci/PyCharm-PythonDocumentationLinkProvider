@@ -1,12 +1,12 @@
 plugins {
     id("java")
 //    id("org.jetbrains.kotlin.jvm") version "1.8.21"
-    id("org.jetbrains.intellij") version "1.13.3"
+    id("org.jetbrains.intellij") version "1.16.1"
     kotlin("jvm") version "1.9.0-Beta"
 }
 
 group = "io.github.guoci"
-version = "0.1.2"
+version = "0.1.3"
 
 repositories {
     mavenCentral()
@@ -35,7 +35,7 @@ tasks {
     patchPluginXml {
 //        sinceBuild.set("222")
         sinceBuild.set("231")
-        untilBuild.set("232.*")
+        untilBuild.set("233.*")
     }
 
     signPlugin {
