@@ -26,7 +26,7 @@
     <li>TensorFlow</li>
     <li>PyTorch</li>
 </ul>
-<em>Important notice</em>
+<em>⚠️Important notice⚠️</em>
 <p>In <code>Settings</code> &rarr; <code>Tools</code> &rarr; <code>(Python) External Documentation</code>, remove URL templates for modules that you do not use.</p>
 <p>Those URL templates will block this plugin from working.</p>
   ]]></description>

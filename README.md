@@ -19,7 +19,7 @@ Currently supported modules:
 - TensorFlow
 - PyTorch
 
-**Important notice**
+**⚠️Important notice⚠️**
 
 In `Settings` :arrow_right: `Tools` :arrow_right: `(Python) External Documentation`, remove URL templates for modules
 that you do not use.
