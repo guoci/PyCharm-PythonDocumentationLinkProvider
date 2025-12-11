@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.guoci"
-version = "0.1.9"
+version = "0.1.10"
 
 repositories {
     mavenCentral()
@@ -34,7 +34,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("231")
-        untilBuild.set("252.*")
+        untilBuild.set("253.*")
     }
 
     signPlugin {
